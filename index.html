@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎮 Genza Education - Petualangan Belajar Kelas IV SD</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #4361ee;
+  --secondary: #f72585;
+  --accent: #4cc9f0;
+  --success: #06d6a0;
+  --warning: #ffd166;
+  --danger: #ef476f;
+  --dark: #1a1a2e;
+  --light: #f8f9fa;
+  --math-color: #4361ee;
+  --pancasila-color: #e63946;
+  --ipas-color: #2a9d8f;
+  --bahasa-color: #e76f51;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+/* Animated Background */
+.bg-particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatParticle linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes floatParticle {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+}
+
+/* Header */
+.main-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(67,97,238,0.9), rgba(247,37,133,0.9));
+  border-bottom: 4px solid var(--warning);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.main-header h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2.2em;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  animation: titleBounce 2s ease-in-out infinite;
+}
+
+.main-header .subtitle {
+  font-size: 1.1em;
+  opacity: 0.9;
+  margin-top: 5px;
+}
+
+@keyframes titleBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Navigation */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(26,26,46,0.95);
+  backdrop-filter: blur(10px);
+  flex-wrap: wrap;
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.nav-btn.active { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+.nav-btn.home-btn { background: linear-gradient(135deg, #667eea, #764ba2); }
+.nav-btn.math-btn { background: linear-gradient(135deg, #4361ee, #3a0ca3); }
+.nav-btn.pancasila-btn { background: linear-gradient(135deg, #e63946, #d62828); }
+.nav-btn.ipas-btn { background: linear-gradient(135deg, #2a9d8f, #264653); }
+.nav-btn.bahasa-btn { background: linear-gradient(135deg, #e76f51, #e9c46a); }
+.nav-btn.quiz-btn { background: linear-gradient(135deg, #f72585, #b5179e); }
+
+/* Pages */
+.page { display: none; position: relative; z-index: 10; padding: 20px; max-width: 1200px; margin: 0 auto; }
+.page.active { display: block; animation: fadeIn 0.5s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Home Page */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+
+.subject-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s;
+  border: 2px solid rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(-30%, -30%); }
+  50% { transform: translate(30%, 30%); }
+}
+
+.subject-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.subject-card .icon {
+  font-size: 4em;
+  margin-bottom: 15px;
+  display: block;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.subject-card h3 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.subject-card p { opacity: 0.8; font-size: 0.95em; }
+
+.subject-card.math-card { border-top: 4px solid var(--math-color); }
+.subject-card.pancasila-card { border-top: 4px solid var(--pancasila-color); }
+.subject-card.ipas-card { border-top: 4px solid var(--ipas-color); }
+.subject-card.bahasa-card { border-top: 4px solid var(--bahasa-color); }
+.subject-card.quiz-card { border-top: 4px solid var(--secondary); }
+
+/* Material Cards */
+.material-section {
+  margin-bottom: 30px;
+}
+
+.material-section h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topic-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid var(--accent);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.topic-card:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(5px);
+}
+
+.topic-card h4 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: var(--warning);
+}
+
+.topic-card p { opacity: 0.85; line-height: 1.6; }
+
+.topic-card .ability {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(76,201,240,0.1);
+  border-radius: 10px;
+  font-size: 0.9em;
+}
+
+.topic-card .ability strong { color: var(--accent); }
+
+/* Interactive Elements */
+.interactive-box {
+  background: rgba(255,255,255,0.05);
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 25px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.interactive-box h4 {
+  font-family: 'Fredoka One', cursive;
+  margin-bottom: 15px;
+  color: var(--warning);
+}
+
+/* Math Visualizations */
+.fraction-visual {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.fraction-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.fraction-circle:hover { transform: scale(1.1); }
+
+.fraction-circle .label {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* Shape Visualizations */
+.shape-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.shape-item {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.shape-item:hover { transform: scale(1.15); }
+
+.shape-item svg { filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3)); }
+
+.shape-item .shape-name {
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+/* Clock Animation */
+.clock-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.analog-clock {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, #e0e0e0 100%);
+  border: 6px solid #333;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 5px;
+  transition: transform 1s ease;
+}
+
+.hour-hand {
+  width: 6px;
+  height: 55px;
+  background: #333;
+  margin-left: -3px;
+}
+
+.minute-hand {
+  width: 4px;
+  height: 75px;
+  background: #666;
+  margin-left: -2px;
+}
+
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: #e63946;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.clock-numbers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.clock-num {
+  position: absolute;
+  font-weight: 900;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Quiz Adventure */
+.adventure-container {
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.adventure-scene {
+  text-align: center;
+  padding: 20px;
+}
+
+.adventure-scene .scene-emoji {
+  font-size: 5em;
+  animation: sceneBounce 1s ease-in-out infinite;
+  display: block;
+  margin-bottom: 15px;
+}
+
+@keyframes sceneBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-15px) rotate(-5deg); }
+  75% { transform: translateY(-5px) rotate(5deg); }
+}
+
+.adventure-scene .scene-text {
+  font-size: 1.2em;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.quiz-question {
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 25px;
+  margin: 20px 0;
+}
+
+.quiz-question h3 {
+  font-family: 'Fredoka One', cursive;
+  color: var(--warning);
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 12px;
+}
+
+.quiz-option {
+  padding: 15px 20px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1em;
+  color: #fff;
+  text-align: left;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+}
+
+.quiz-option:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--accent);
+  transform: translateX(5px);
+}
+
+.quiz-option.correct {
+  background: rgba(6,214,160,0.3);
+  border-color: var(--success);
+  animation: correctPulse 0.5s ease;
+}
+
+.quiz-option.wrong {
+  background: rgba(239,71,111,0.3);
+  border-color: var(--danger);
+  animation: shake 0.5s ease;
+}
+
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* Explanation Box */
+.explanation-box {
+  background: linear-gradient(135deg, rgba(6,214,160,0.2), rgba(76,201,240,0.2));
+  border: 2px solid var(--success);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 15px 0;
+  display: none;
+  animation: slideDown 0.5s ease;
+}
+
+.explanation-box.show { display: block; }
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 500px; }
+}
+
+.explanation-box h4 {
+  color: var(--success);
+  font-family: 'Fredoka One', cursive;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.explanation-box p { line-height: 1.7; }
+
+/* Audio Button */
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, var(--secondary), #b5179e);
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 10px 5px;
+  font-size: 0.95em;
+}
+
+.audio-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(247,37,133,0.4); }
+.audio-btn.playing { animation: audioPulse 1s ease-in-out infinite; }
+
+@keyframes audioPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(247,37,133,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(247,37,133,0); }
+}
+
+/* Progress Bar */
+.progress-container {
+  background: rgba(255,255,255,0.1);
+  border-radius: 25px;
+  height: 20px;
+  margin: 20px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success), var(--accent));
+  border-radius: 25px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: progressShine 2s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-text {
+  text-align: center;
+  font-weight: 700;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+/* Score Display */
+.score-display {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.score-item {
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 15px 25px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.score-item .score-value {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2em;
+  color: var(--warning);
+}
+
+.score-item .score-label {
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+/* Adventure Map */
+.adventure-map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 16px;
+}
+
+.map-node {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 3px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+}
+
+.map-node.completed { background: var(--success); border-color: var(--success); }
+.map-node.current { background: var(--warning); border-color: var(--warning); animation: nodePulse 1.5s ease-in-out infinite; color: #333; }
+.map-node.locked { opacity: 0.4; cursor: not-allowed; }
+
+@keyframes nodePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,209,102,0.4); }
+  50% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255,209,102,0); }
+}
+
+.map-path {
+  width: 30px;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+}
+
+.map-path.completed { background: var(--success); }
+
+/* Interactive Canvas */
+.canvas-container {
+  background: rgba(0,0,0,0.3);
+  border-radius: 16px;
+  padding: 15px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.canvas-container canvas {
+  border-radius: 12px;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+/* Control Buttons */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #fff;
+}
+
+.action-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+.action-btn.primary { background: linear-gradient(135deg, var(--primary), #3a0ca3); }
+.action-btn.success { background: linear-gradient(135deg, var(--success), #059669); }
+.action-btn.warning { background: linear-gradient(135deg, var(--warning), #f59e0b); color: #333; }
+.action-btn.danger { background: linear-gradient(135deg, var(--danger), #dc2626); }
+
+/* Sound Toggle */
+.sound-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--secondary), #b5179e);
+  border: none;
+  color: #fff;
+  font-size: 1.5em;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(247,37,133,0.4);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sound-toggle:hover { transform: scale(1.1); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-header h1 { font-size: 1.5em; }
+  .nav-btn { padding: 8px 14px; font-size: 0.8em; }
+  .subject-card { padding: 20px; }
+  .subject-card .icon { font-size: 3em; }
+  .adventure-scene .scene-emoji { font-size: 3em; }
+}
+
+/* Confetti */
+.confetti-piece {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  background: rgba(0,0,0,0.9);
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 100;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+/* Tab System */
+.tab-container {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px 12px 0 0;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab-btn.active {
+  background: rgba(255,255,255,0.2);
+  border-color: var(--accent);
+  border-bottom-color: transparent;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+/* Drag and Drop */
+.drag-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.drag-item {
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  cursor: grab;
+  transition: all 0.3s;
+  font-weight: 700;
+  user-select: none;
+}
+
+.drag-item:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
+.drag-item:active { cursor: grabbing; }
+.drag-item.placed { background: rgba(6,214,160,0.3); border-color: var(--success); }
+
+.drop-zone {
+  min-height: 60px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.drop-zone.highlight { background: rgba(76,201,240,0.2); border-color: var(--accent); }
+
+/* Character */
+.character {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  font-size: 3em;
+  cursor: pointer;
+  animation: characterBounce 2s ease-in-out infinite;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+}
+
+@keyframes characterBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.character-speech {
+  position: fixed;
+  bottom: 90px;
+  left: 20px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.95);
+  color: #333;
+  padding: 12px 18px;
+  border-radius: 16px;
+  max-width: 280px;
+  font-size: 0.9em;
+  font-weight: 600;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.character-speech::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 30px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(255,255,255,0.95);
+}
+
+.character-speech.show { display: block; animation: fadeIn 0.3s ease; }
+
+/* Loading Animation */
+.loading-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #0f0c29, #302b63);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+}
+
+.loading-overlay.hide { opacity: 0; pointer-events: none; }
+
+.loading-spinner {
+  width: 80px;
+  height: 80px;
+  border: 6px solid rgba(255,255,255,0.1);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text {
+  margin-top: 20px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3em;
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Number line for math */
+.number-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 20px 0;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.number-point {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.number-point:hover { background: var(--accent); transform: scale(1.2); }
+.number-point.active { background: var(--warning); color: #333; transform: scale(1.3); }
+
+.number-line-segment {
+  width: 30px;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+  flex-shrink: 0;
+}
+
+/* Bar chart for data */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 15px;
+  height: 200px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.bar {
+  width: 50px;
+  background: linear-gradient(to top, var(--primary), var(--accent));
+  border-radius: 8px 8px 0 0;
+  transition: height 1s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.bar:hover { filter: brightness(1.2); }
+
+.bar .bar-value {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 900;
+  font-size: 0.9em;
+}
+
+.bar .bar-label {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75em;
+  white-space: nowrap;
+}
+
+/* Money visualization */
+.money-display {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.money-item {
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  color: #333;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.money-item:hover { transform: translateY(-5px) scale(1.05); }
+
+/* Life cycle */
+.lifecycle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.lifecycle-stage {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 100px;
+}
+
+.lifecycle-stage:hover { transform: scale(1.1); background: rgba(255,255,255,0.2); }
+.lifecycle-stage .stage-emoji { font-size: 2.5em; display: block; margin-bottom: 5px; }
+.lifecycle-stage .stage-name { font-weight: 700; font-size: 0.85em; }
+
+.lifecycle-arrow {
+  font-size: 2em;
+  color: var(--accent);
+  animation: arrowPulse 1s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Energy transformation */
+.energy-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.energy-box {
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.energy-box:hover { transform: scale(1.1); }
+.energy-box.source { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+.energy-box.transform { background: linear-gradient(135deg, #ffd166, #f39c12); color: #333; }
+.energy-box.result { background: linear-gradient(135deg, #06d6a0, #059669); }
+
+.energy-arrow {
+  font-size: 1.5em;
+  animation: arrowMove 1s ease-in-out infinite;
+}
+
+@keyframes arrowMove {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* Pancasila values */
+.pancasila-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.pancasila-item {
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.pancasila-item:hover { border-color: var(--pancasila-color); transform: translateY(-5px); }
+.pancasila-item .p-icon { font-size: 2.5em; display: block; margin-bottom: 8px; }
+.pancasila-item .p-title { font-weight: 800; font-size: 0.95em; }
+.pancasila-item .p-desc { font-size: 0.8em; opacity: 0.7; margin-top: 5px; }
+
+/* Footer */
+.main-footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  border-top: 2px solid rgba(255,255,255,0.1);
+  opacity: 0.7;
+  font-size: 0.9em;
+  position: relative;
+  z-index: 10;
+}
+</style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">🚀 Memuat Petualangan Belajar...</div>
+</div>
+
+<!-- Background Particles -->
+<div class="bg-particles" id="bgParticles"></div>
+
+<!-- Character -->
+<div class="character" id="character" onclick="toggleCharacterSpeech()">🦊</div>
+<div class="character-speech" id="characterSpeech">
+  Halo! Aku Foxy si Rubah Pintar! 🦊 Klik aku untuk tips belajar!
+</div>
+
+<!-- Sound Toggle -->
+<button class="sound-toggle" id="soundToggle" onclick="toggleSound()">🔊</button>
+
+<!-- Header -->
+<header class="main-header">
+  <h1>🎮 Genza Education - Petualangan Belajar</h1>
+  <div class="subtitle">Kisi-Kisi Kompetisi Kelas IV SD | Event Kompetisi SAS</div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav-bar">
+  <button class="nav-btn home-btn active" onclick="showPage('home')">🏠 Beranda</button>
+  <button class="nav-btn math-btn" onclick="showPage('math')">🔢 Matematika</button>
+  <button class="nav-btn pancasila-btn" onclick="showPage('pancasila')">🇮🇩 Pancasila</button>
+  <button class="nav-btn ipas-btn" onclick="showPage('ipas')">🔬 IPAS</button>
+  <button class="nav-btn bahasa-btn" onclick="showPage('bahasa')">📖 Bahasa Indonesia</button>
+  <button class="nav-btn quiz-btn" onclick="showPage('quiz')">⚔️ Petualangan Quiz</button>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="home-grid">
+    <div class="subject-card math-card" onclick="showPage('math')">
+      <span class="icon">🔢</span>
+      <h3>Matematika</h3>
+      <p>Operasi hitung, pecahan, keliling & luas, nilai uang, bangun ruang, KPK, dan sudut</p>
+    </div>
+    <div class="subject-card pancasila-card" onclick="showPage('pancasila')">
+      <span class="icon">🇮🇩</span>
+      <h3>Pendidikan Pancasila</h3>
+      <p>Hak & kewajiban, kerja sama, musyawarah, keberagaman, dan persatuan</p>
+    </div>
+    <div class="subject-card ipas-card" onclick="showPage('ipas')">
+      <span class="icon">🔬</span>
+      <h3>IPAS</h3>
+      <p>Kebutuhan makhluk hidup, daur hidup, adaptasi, energi, dan kegiatan ekonomi</p>
+    </div>
+    <div class="subject-card bahasa-card" onclick="showPage('bahasa')">
+      <span class="icon">📖</span>
+      <h3>Bahasa Indonesia</h3>
+      <p>Memahami bacaan, huruf kapital, peribahasa, kalimat efektif, dan konjungsi</p>
+    </div>
+    <div class="subject-card quiz-card" onclick="showPage('quiz')">
+      <span class="icon">⚔️</span>
+      <h3>Petualangan Quiz</h3>
+      <p>Taklukkan semua tantangan dan kumpulkan bintang! 🌟</p>
+    </div>
+  </div>
+
+  <div class="score-display">
+    <div class="score-item">
+      <div class="score-value" id="totalStars">0</div>
+      <div class="score-label">⭐ Bintang</div>
+    </div>
+    <div class="score-item">
+      <div class="score-value" id="totalCorrect">0</div>
+      <div class="score-label">✅ Benar</div>
+    </div>
+    <div class="score-item">
+      <div class="score-value" id="totalAttempts">0</div>
+      <div class="score-label">📝 Percobaan</div>
+    </div>
+  </div>
+</div>
+
+<!-- MATH PAGE -->
+<div class="page" id="page-math">
+  <div class="material-section">
+    <h2 style="border-color: var(--math-color);">🔢 Matematika - Kelas IV SD</h2>
+    <p style="opacity:0.8; margin-bottom:20px; line-height:1.7;">
+      <strong>Fokus belajar:</strong> operasi hitung dalam soal cerita, pecahan, keliling dan luas, nilai uang, bangun ruang, kelipatan persekutuan, serta sudut.
+    </p>
+
+    <!-- Topic 1: Operasi Hitung -->
+    <div class="topic-card" onclick="speakText('Operasi hitung perkalian dan pengurangan. Menyelesaikan soal bertahap, misalnya menghitung jumlah seluruh buku dari beberapa kotak kemudian mengurangi buku yang dipinjam.')">
+      <h4>📦 1. Operasi Hitung Perkalian dan Pengurangan</h4>
+      <p>Menyelesaikan soal bertahap: menghitung jumlah dari beberapa kelompok, lalu mengurangi sebagian.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menghitung jumlah seluruh buku dari beberapa kotak kemudian mengurangi buku yang dipinjam.
+      </div>
+      <div class="interactive-box">
+        <h4>🎮 Coba Hitung!</h4>
+        <p>Ada 4 kotak, setiap kotak berisi 12 buku. 5 buku dipinjam. Berapa sisa buku?</p>
+        <div class="btn-group">
+          <button class="action-btn primary" onclick="checkMathAnswer(this, 43)">43</button>
+          <button class="action-btn primary" onclick="checkMathAnswer(this, 48)">48</button>
+          <button class="action-btn primary" onclick="checkMathAnswer(this, 38)">38</button>
+        </div>
+        <div class="explanation-box" id="mathExp1">
+          <h4>🎉 Pembahasan</h4>
+          <p>4 kotak × 12 buku = 48 buku total. Kemudian 48 - 5 = <strong>43 buku</strong> sisa. Jawabannya 43! 🎊</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2: Pecahan -->
+    <div class="topic-card">
+      <h4>🍕 2. Membandingkan Pecahan Sederhana</h4>
+      <p>Membandingkan nilai pecahan seperti 1/2, 1/4, dan 1/8.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menentukan pecahan yang nilainya paling besar.
+      </div>
+      <div class="interactive-box">
+        <h4>🎨 Visualisasi Pecahan</h4>
+        <p>Klik lingkaran untuk melihat perbandingan!</p>
+        <div class="fraction-visual">
+          <div class="fraction-circle" style="background: conic-gradient(#4361ee 0deg 180deg, rgba(255,255,255,0.2) 180deg 360deg);" onclick="speakText('Setengah atau satu per dua. Ini yang paling besar!')">
+            <span class="label">1/2</span>
+          </div>
+          <div class="fraction-circle" style="background: conic-gradient(#f72585 0deg 90deg, rgba(255,255,255,0.2) 90deg 360deg);" onclick="speakText('Seperempat. Lebih kecil dari setengah.')">
+            <span class="label">1/4</span>
+          </div>
+          <div class="fraction-circle" style="background: conic-gradient(#06d6a0 0deg 45deg, rgba(255,255,255,0.2) 45deg 360deg);" onclick="speakText('Seperdelapan. Ini yang paling kecil!')">
+            <span class="label">1/8</span>
+          </div>
+        </div>
+        <p style="margin-top:30px; font-weight:700;">🏆 1/2 > 1/4 > 1/8</p>
+        <button class="audio-btn" onclick="speakText('Semakin besar penyebut, semakin kecil nilai pecahannya. Jadi satu per dua lebih besar dari satu per empat, dan satu per empat lebih besar dari satu per delapan.')">🔊 Dengarkan Penjelasan</button>
+      </div>
+    </div>
+
+    <!-- Topic 3: Keliling Persegi Panjang -->
+    <div class="topic-card">
+      <h4>📐 3. Keliling Persegi Panjang</h4>
+      <p>Menghitung panjang pagar yang diperlukan untuk mengelilingi taman berbentuk persegi panjang.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menghitung panjang pagar untuk mengelilingi taman persegi panjang.
+      </div>
+      <div class="interactive-box">
+        <h4>🌳 Taman Persegi Panjang</h4>
+        <canvas id="gardenCanvas" width="300" height="200" style="background: rgba(0,100,0,0.2); border-radius:12px;"></canvas>
+        <p style="margin-top:10px;">Panjang = 15 m, Lebar = 8 m</p>
+        <p style="font-weight:700; color: var(--warning);">Keliling = 2 × (p + l) = 2 × (15 + 8) = 2 × 23 = 46 m</p>
+        <button class="audio-btn" onclick="speakText('Keliling persegi panjang rumusnya dua kali panjang plus lebar. Jadi dua kali lima belas tambah delapan sama dengan empat puluh enam meter.')">🔊 Dengarkan</button>
+      </div>
+    </div>
+
+    <!-- Topic 4: Nilai Uang -->
+    <div class="topic-card">
+      <h4>💰 4. Nilai Uang dan Perbandingan Harga</h4>
+      <p>Menjumlahkan nilai beberapa lembar uang dan membandingkan dengan harga barang.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menjumlahkan nilai uang dan membandingkan dengan harga barang.
+      </div>
+      <div class="interactive-box">
+        <h4>🛒 Belanja di Toko</h4>
+        <div class="money-display">
+          <div class="money-item" onclick="speakText('Lima puluh ribu rupiah')">💵 Rp50.000</div>
+          <div class="money-item" onclick="speakText('Dua puluh ribu rupiah')">💵 Rp20.000</div>
+          <div class="money-item" onclick="speakText('Sepuluh ribu rupiah')">💵 Rp10.000</div>
+        </div>
+        <p style="margin:15px 0;">Total: <strong style="color:var(--warning); font-size:1.3em;">Rp80.000</strong></p>
+        <p>Harga buku: Rp65.000. Apakah uang cukup? <strong style="color:var(--success);">✅ Ya, sisa Rp15.000!</strong></p>
+      </div>
+    </div>
+
+    <!-- Topic 5: Bangun Ruang -->
+    <div class="topic-card">
+      <h4>📦 5. Mengenal Bangun Ruang</h4>
+      <p>Mencocokkan benda dengan bentuk kubus, balok, tabung, kerucut, dan bola.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Mencocokkan benda sehari-hari dengan bentuk bangun ruang.
+      </div>
+      <div class="interactive-box">
+        <h4>🎯 Cocokkan Benda dengan Bentuknya!</h4>
+        <div class="shape-container">
+          <div class="shape-item" onclick="speakText('Kubus! Seperti dadu atau rubik.')">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <rect x="10" y="20" width="50" height="50" fill="#4361ee" rx="3"/>
+              <polygon points="10,20 30,5 80,5 60,20" fill="#3a0ca3"/>
+              <polygon points="60,20 80,5 80,55 60,70" fill="#2a0a7a"/>
+            </svg>
+            <div class="shape-name">Kubus 🎲</div>
+          </div>
+          <div class="shape-item" onclick="speakText('Balok! Seperti kotak sepatu atau buku.')">
+            <svg width="100" height="80" viewBox="0 0 100 80">
+              <rect x="5" y="20" width="70" height="50" fill="#f72585" rx="3"/>
+              <polygon points="5,20 25,5 95,5 75,20" fill="#b5179e"/>
+              <polygon points="75,20 95,5 95,55 75,70" fill="#7b0f6e"/>
+            </svg>
+            <div class="shape-name">Balok 📚</div>
+          </div>
+          <div class="shape-item" onclick="speakText('Tabung! Seperti kaleng atau gelas.')">
+            <svg width="60" height="80" viewBox="0 0 60 80">
+              <ellipse cx="30" cy="15" rx="25" ry="10" fill="#06d6a0"/>
+              <rect x="5" y="15" width="50" height="50" fill="#059669"/>
+              <ellipse cx="30" cy="65" rx="25" ry="10" fill="#047857"/>
+            </svg>
+            <div class="shape-name">Tabung 🥫</div>
+          </div>
+          <div class="shape-item" onclick="speakText('Kerucut! Seperti topi pesta atau es krim.')">
+            <svg width="60" height="80" viewBox="0 0 60 80">
+              <polygon points="30,5 5,65 55,65" fill="#ffd166"/>
+              <ellipse cx="30" cy="65" rx="25" ry="10" fill="#f59e0b"/>
+            </svg>
+            <div class="shape-name">Kerucut 🍦</div>
+          </div>
+          <div class="shape-item" onclick="speakText('Bola! Seperti bola sepak atau kelereng.')">
+            <svg width="70" height="70" viewBox="0 0 70 70">
+              <circle cx="35" cy="35" r="30" fill="#ef476f"/>
+              <ellipse cx="25" cy="25" rx="10" ry="8" fill="rgba(255,255,255,0.3)"/>
+            </svg>
+            <div class="shape-name">Bola ⚽</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6: KPK -->
+    <div class="topic-card">
+      <h4>🔁 6. Kelipatan Persekutuan Terkecil (KPK)</h4>
+      <p>Menentukan kapan dua kejadian berulang terjadi bersamaan lagi.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menentukan kapan dua lampu yang menyala pada selang waktu berbeda menyala bersamaan lagi.
+      </div>
+      <div class="interactive-box">
+        <h4>💡 Lampu Berkedip</h4>
+        <p>Lampu A menyala setiap <strong>4 detik</strong>, Lampu B setiap <strong>6 detik</strong>. Kapan menyala bersamaan?</p>
+        <div class="number-line" id="kpkNumberLine"></div>
+        <p style="margin-top:20px; font-weight:700; color:var(--warning);">KPK(4,6) = 12 → Setiap 12 detik!</p>
+        <button class="audio-btn" onclick="speakText('Kelipatan 4 adalah 4, 8, 12, 16. Kelipatan 6 adalah 6, 12, 18. Yang sama adalah 12. Jadi KPK-nya 12!')">🔊 Dengarkan</button>
+      </div>
+    </div>
+
+    <!-- Topic 7: Pengurangan Pecahan -->
+    <div class="topic-card">
+      <h4>✂️ 7. Pengurangan Pecahan</h4>
+      <p>Menghitung sisa bagian dari satu utuh, misalnya sisa pita setelah sebagian digunakan.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menghitung sisa pita setelah sebagian digunakan.
+      </div>
+      <div class="interactive-box">
+        <h4>🎀 Sisa Pita</h4>
+        <p>Pita sepanjang 1 meter, digunakan 3/4. Berapa sisanya?</p>
+        <p style="font-size:1.3em; margin:15px 0;">1 - 3/4 = 4/4 - 3/4 = <strong style="color:var(--success);">1/4</strong></p>
+        <div style="width:80%; height:30px; background:linear-gradient(90deg, #ef476f 0%, #ef476f 75%, #06d6a0 75%, #06d6a0 100%); border-radius:15px; margin:15px auto;"></div>
+        <p style="font-size:0.9em;">🔴 3/4 digunakan | 🟢 1/4 sisa</p>
+      </div>
+    </div>
+
+    <!-- Topic 8: Sudut pada Jarum Jam -->
+    <div class="topic-card">
+      <h4>🕐 8. Sudut pada Jarum Jam</h4>
+      <p>Menentukan besar sudut yang dibentuk jarum jam pada waktu tertentu.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menentukan besar sudut jarum jam, seperti pukul 03.00.
+      </div>
+      <div class="interactive-box">
+        <h4>⏰ Jam Analog Interaktif</h4>
+        <div class="clock-container">
+          <div class="analog-clock" id="analogClock">
+            <div class="clock-hand hour-hand" id="hourHand"></div>
+            <div class="clock-hand minute-hand" id="minuteHand"></div>
+            <div class="clock-center"></div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="action-btn primary" onclick="setClock(3,0)">Pukul 03.00</button>
+          <button class="action-btn primary" onclick="setClock(6,0)">Pukul 06.00</button>
+          <button class="action-btn primary" onclick="setClock(9,0)">Pukul 09.00</button>
+          <button class="action-btn primary" onclick="setClock(12,0)">Pukul 12.00</button>
+        </div>
+        <p id="angleDisplay" style="font-weight:700; font-size:1.2em; color:var(--warning); margin-top:10px;">Sudut: 90° (Sudut Siku-siku)</p>
+      </div>
+    </div>
+
+    <!-- Topic 9 & 10: Keliling & Luas -->
+    <div class="topic-card">
+      <h4>📏 9 & 10. Keliling dan Luas Persegi & Persegi Panjang</h4>
+      <p>Menghitung dan membandingkan keliling serta luas dua bangun berdasarkan ukuran sisinya.</p>
+      <div class="ability">
+        <strong>💡 Kemampuan:</strong> Menghitung dan membandingkan keliling & luas dua bangun.
+      </div>
+      <div class="interactive-box">
+        <h4>📊 Bandingkan Dua Bangun!</h4>
+        <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin:15px 0;">
+          <div>
+            <div style="width:100px; height:100px; background:rgba(67,97,238,0.5); border:3px solid #4361ee; border-radius:5px; display:flex; align-items:center; justify-content:center; font-weight:900;">10×10</div>
+            <p style="margin-top:8px;"><strong>Persegi</strong><br>Keliling: 40 cm<br>Luas: 100 cm²</p>
+          </div>
+          <div>
+            <div style="width:140px; height:70px; background:rgba(247,37,133,0.5); border:3px solid #f72585; border-radius:5px; display:flex; align-items:center; justify-content:center; font-weight:900;">14×7</div>
+            <p style="margin-top:8px;"><strong>Persegi Panjang</strong><br>Keliling: 42 cm<br>Luas: 98 cm²</p>
+          </div>
+        </div>
+        <p style="font-weight:700;">📐 Persegi panjang memiliki keliling lebih besar, tapi luas lebih kecil!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANCASILA PAGE -->
+<div class="page" id="page-pancasila">
+  <div class="material-section">
+    <h2 style="border-color: var(--pancasila-color);">🇮🇩 Pendidikan Pancasila - Kelas IV SD</h2>
+    <p style="opacity:0.8; margin-bottom:20px; line-height:1.7;">
+      <strong>Fokus belajar:</strong> menjalankan hak dan kewajiban, bekerja sama, bermusyawarah, menghargai keberagaman, memahami peran warga dan lembaga pemerintahan, serta menjaga persatuan.
+    </p>
+
+    <div class="topic-card">
+      <h4>⚖️ 1. Hubungan Hak dan Kewajiban</h4>
+      <p>Menjelaskan mengapa hak perlu diimbangi dengan pelaksanaan kewajiban untuk menciptakan kehidupan tertib.</p>
+      <div class="interactive-box">
+        <h4>🎭 Hak vs Kewajiban</h4>
+        <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+          <div style="background:rgba(6,214,160,0.2); padding:20px; border-radius:16px; min-width:200px;">
+            <h4 style="color:var(--success);">✅ Hak</h4>
+            <p>• Mendapat pendidikan<br>• Bermain<br>• Dilindungi<br>• Didengar pendapatnya</p>
+          </div>
+          <div style="font-size:2em; align-self:center;">⚖️</div>
+          <div style="background:rgba(239,71,111,0.2); padding:20px; border-radius:16px; min-width:200px;">
+            <h4 style="color:var(--danger);">📋 Kewajiban</h4>
+            <p>• Belajar dengan rajin<br>• Menghormati orang tua<br>• Menjaga kebersihan<br>• Mengikuti aturan</p>
+          </div>
+        </div>
+        <button class="audio-btn" onclick="speakText('Hak dan kewajiban harus seimbang. Kita punya hak mendapat pendidikan, tapi juga punya kewajiban belajar dengan rajin. Seperti dua sisi mata uang yang tidak bisa dipisahkan!')">🔊 Dengarkan</button>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🤝 2. Kerja Sama dan Pembagian Tugas</h4>
+      <p>Menentukan alasan pembagian tugas kelompok perlu mempertimbangkan kemampuan agar setiap anggota dapat berkontribusi.</p>
+      <div class="interactive-box">
+        <h4>👥 Pembagian Tugas Kelompok</h4>
+        <p>Klik untuk melihat pembagian tugas yang adil!</p>
+        <div class="pancasila-grid">
+          <div class="pancasila-item" onclick="speakText('Ani pandai menggambar, jadi diabertugas membuat poster.')">
+            <span class="p-icon">🎨</span>
+            <span class="p-title">Ani - Menggambar</span>
+            <span class="p-desc">Pandai menggambar</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Budi suka menulis, jadi diabertugas membuat laporan.')">
+            <span class="p-icon">✍️</span>
+            <span class="p-title">Budi - Menulis</span>
+            <span class="p-desc">Suka menulis</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Citra pandai berbicara, jadi diabertugas presentasi.')">
+            <span class="p-icon">🎤</span>
+            <span class="p-title">Citra - Presentasi</span>
+            <span class="p-desc">Pandai berbicara</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Doni teliti, jadi diabertugas mengumpulkan data.')">
+            <span class="p-icon">📊</span>
+            <span class="p-title">Doni - Data</span>
+            <span class="p-desc">Teliti dan rapi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🎭 3. Menghargai Keberagaman Budaya</h4>
+      <p>Menjelaskan manfaat festival budaya dan sikap bangga tanpa merendahkan budaya lain.</p>
+      <div class="interactive-box">
+        <h4>🌏 Keberagaman Indonesia</h4>
+        <div class="pancasila-grid">
+          <div class="pancasila-item" onclick="speakText('Rumah Gadang dari Sumatera Barat. Bentuknya unik seperti tanduk kerbau!')">
+            <span class="p-icon">🏠</span>
+            <span class="p-title">Rumah Gadang</span>
+            <span class="p-desc">Sumatera Barat</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Tari Saman dari Aceh. Tari ini sangat cepat dan kompak!')">
+            <span class="p-icon">💃</span>
+            <span class="p-title">Tari Saman</span>
+            <span class="p-desc">Aceh</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Angklung dari Jawa Barat. Alat musik dari bambu yang diakui UNESCO!')">
+            <span class="p-icon">🎵</span>
+            <span class="p-title">Angklung</span>
+            <span class="p-desc">Jawa Barat</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Batik dari Jawa. Motifnya sangat indah dan beragam!')">
+            <span class="p-icon">👘</span>
+            <span class="p-title">Batik</span>
+            <span class="p-desc">Jawa</span>
+          </div>
+        </div>
+        <p style="margin-top:15px; font-weight:700; color:var(--warning);">🌟 Bhinneka Tunggal Ika - Berbeda-beda tetapi tetap satu!</p>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🙏 4. Penerapan Nilai-Nilai Pancasila</h4>
+      <p>Mengenali perilaku berdoa, menolong teman, menghormati perbedaan agama, dan bermusyawarah.</p>
+      <div class="interactive-box">
+        <h4>⭐ 5 Sila Pancasila</h4>
+        <div class="pancasila-grid">
+          <div class="pancasila-item" onclick="speakText('Sila pertama: Ketuhanan Yang Maha Esa. Kita percaya kepada Tuhan dan saling menghormati agama.')">
+            <span class="p-icon">⭐</span>
+            <span class="p-title">Sila 1</span>
+            <span class="p-desc">Ketuhanan YME</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Sila kedua: Kemanusiaan yang Adil dan Beradab. Saling menghargai dan menolong sesama.')">
+            <span class="p-icon">⭐</span>
+            <span class="p-title">Sila 2</span>
+            <span class="p-desc">Kemanusiaan</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Sila ketiga: Persatuan Indonesia. Menjaga persatuan dan kesatuan bangsa.')">
+            <span class="p-icon">⭐</span>
+            <span class="p-title">Sila 3</span>
+            <span class="p-desc">Persatuan</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Sila keempat: Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan. Bermusyawarah untuk keputusan bersama.')">
+            <span class="p-icon">⭐</span>
+            <span class="p-title">Sila 4</span>
+            <span class="p-desc">Kerakyatan</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Sila kelima: Keadilan Sosial bagi Seluruh Rakyat Indonesia. Adil untuk semua.')">
+            <span class="p-icon">⭐</span>
+            <span class="p-title">Sila 5</span>
+            <span class="p-desc">Keadilan Sosial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🗳️ 5. Musyawarah untuk Mengambil Keputusan</h4>
+      <p>Memilih keputusan bersama yang mempertimbangkan kebutuhan, manfaat, dan keterbatasan sumber daya.</p>
+      <div class="interactive-box">
+        <h4>📋 Proses Musyawarah</h4>
+        <div class="lifecycle-container">
+          <div class="lifecycle-stage" onclick="speakText('Tahap 1: Mengemukakan pendapat. Semua anggota menyampaikan idenya.')">
+            <span class="stage-emoji">🗣️</span>
+            <span class="stage-name">1. Kemukakan Pendapat</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Tahap 2: Mendengarkan. Semua orang mendengarkan dengan baik.')">
+            <span class="stage-emoji">👂</span>
+            <span class="stage-name">2. Mendengarkan</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Tahap 3: Diskusi. Membahas semua pendapat dengan baik.')">
+            <span class="stage-emoji">💬</span>
+            <span class="stage-name">3. Diskusi</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Tahap 4: Keputusan. Menentukan keputusan bersama yang terbaik!')">
+            <span class="stage-emoji">✅</span>
+            <span class="stage-name">4. Keputusan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🏛️ 6. Lembaga Pemerintahan dan Peran Warga</h4>
+      <p>Mengenali contoh peran DPRD, presiden, dan kewajiban warga mematuhi aturan.</p>
+      <div class="interactive-box">
+        <h4>🏢 Lembaga Pemerintahan</h4>
+        <div class="pancasila-grid">
+          <div class="pancasila-item" onclick="speakText('Presiden adalah kepala negara dan kepala pemerintahan. Memimpin seluruh Indonesia.')">
+            <span class="p-icon">👔</span>
+            <span class="p-title">Presiden</span>
+            <span class="p-desc">Kepala Negara</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('DPRD membahas peraturan daerah untuk kepentingan masyarakat setempat.')">
+            <span class="p-icon">🏛️</span>
+            <span class="p-title">DPRD</span>
+            <span class="p-desc">Peraturan Daerah</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Warga negara wajib mematuhi aturan seperti membayar pajak dan menjaga kebersihan.')">
+            <span class="p-icon">👥</span>
+            <span class="p-title">Warga Negara</span>
+            <span class="p-desc">Mematuhi Aturan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🏡 7. Warisan Budaya Indonesia</h4>
+      <p>Mengenali rumah adat, tarian daerah, dan alat musik tradisional sebagai identitas budaya.</p>
+    </div>
+
+    <div class="topic-card">
+      <h4>🤝 8. Persatuan dalam NKRI</h4>
+      <p>Memahami bahwa wilayah dan masyarakat yang beragam tetap menjadi satu negara dan perlu menjaga persatuan.</p>
+    </div>
+
+    <div class="topic-card">
+      <h4>🌊 9. Pelestarian Kekayaan Laut</h4>
+      <p>Menentukan cara memanfaatkan sumber daya laut secara bijaksana agar tetap bermanfaat bagi generasi mendatang.</p>
+      <div class="interactive-box">
+        <h4>🐠 Laut Kita</h4>
+        <p>✅ Lakukan: Menangkap ikan secukupnya, tidak membuang sampah ke laut, menjaga terumbu karang</p>
+        <p>❌ Hindari: Bom ikan, racun ikan, membuang limbah, mengambil karang</p>
+        <button class="audio-btn" onclick="speakText('Laut Indonesia sangat kaya! Kita harus menjaganya dengan tidak menangkap ikan secara berlebihan, tidak membuang sampah, dan melindungi terumbu karang agar anak cucu kita juga bisa menikmati keindahan laut.')">🔊 Dengarkan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IPAS PAGE -->
+<div class="page" id="page-ipas">
+  <div class="material-section">
+    <h2 style="border-color: var(--ipas-color);">🔬 IPAS - Kelas IV SD</h2>
+    <p style="opacity:0.8; margin-bottom:20px; line-height:1.7;">
+      <strong>Fokus belajar:</strong> memahami kebutuhan dan penyesuaian makhluk hidup, hubungan manusia dengan lingkungan, energi, sumber daya alam, budaya, dan kegiatan ekonomi.
+    </p>
+
+    <div class="topic-card">
+      <h4>🌱 1. Kebutuhan Tumbuhan untuk Tumbuh</h4>
+      <p>Menarik kesimpulan dari perbandingan tanaman yang disiram dan tidak disiram.</p>
+      <div class="interactive-box">
+        <h4>🌿 Eksperimen Virtual: Siram vs Tidak Disiram</h4>
+        <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin:15px 0;">
+          <div style="text-align:center;">
+            <div style="font-size:4em; animation: plantGrow 2s ease-in-out infinite;">🌳</div>
+            <p><strong>Disiram 💧</strong></p>
+            <p style="color:var(--success);">Tumbuh subur! ✅</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:4em; opacity:0.5;">🥀</div>
+            <p><strong>Tidak Disiram</strong></p>
+            <p style="color:var(--danger);">Layu dan mati ❌</p>
+          </div>
+        </div>
+        <p style="font-weight:700;">💧 Air sangat penting untuk pertumbuhan tumbuhan!</p>
+        <button class="audio-btn" onclick="speakText('Tumbuhan membutuhkan air, cahaya matahari, udara, dan nutrisi dari tanah untuk tumbuh. Tanpa air, tumbuhan akan layu dan mati. Air membantu tumbuhan membuat makanan melalui fotosintesis.')">🔊 Dengarkan</button>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🦋 2. Daur Hidup dan Perkembangan Makhluk Hidup</h4>
+      <p>Mengurutkan tahapan daur hidup kupu-kupu dan mengenali pertumbuhan serta perkembangan.</p>
+      <div class="interactive-box">
+        <h4>🦋 Daur Hidup Kupu-Kupu</h4>
+        <div class="lifecycle-container">
+          <div class="lifecycle-stage" onclick="speakText('Tahap 1: Telur. Kupu-kupu memulai hidup dari telur yang kecil.')">
+            <span class="stage-emoji">🥚</span>
+            <span class="stage-name">1. Telur</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Tahap 2: Ulat. Telur menetas menjadi ulat yang suka makan daun.')">
+            <span class="stage-emoji">🐛</span>
+            <span class="stage-name">2. Ulat (Larva)</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Tahap 3: Kepompong. Ulat membungkus diri menjadi kepompong.')">
+            <span class="stage-emoji">🫘</span>
+            <span class="stage-name">3. Kepompong (Pupa)</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Tahap 4: Kupu-kupu! Kepompong berubah menjadi kupu-kupu yang indah!')">
+            <span class="stage-emoji">🦋</span>
+            <span class="stage-name">4. Kupu-kupu</span>
+          </div>
+        </div>
+        <p style="margin-top:15px; font-weight:700; color:var(--warning);">🔄 Ini disebut metamorfosis sempurna!</p>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🦆 3. Adaptasi Bentuk Tubuh Hewan</h4>
+      <p>Menghubungkan ciri tubuh hewan dengan cara hidupnya.</p>
+      <div class="interactive-box">
+        <h4>🔍 Adaptasi Hewan</h4>
+        <div class="pancasila-grid">
+          <div class="pancasila-item" onclick="speakText('Bebek punya kaki berselaput untuk berenang di air.')">
+            <span class="p-icon">🦆</span>
+            <span class="p-title">Kaki Berselaput</span>
+            <span class="p-desc">Bebek - untuk berenang</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Elang punya cakar tajam untuk mencengkeram mangsa.')">
+            <span class="p-icon">🦅</span>
+            <span class="p-title">Cakar Tajam</span>
+            <span class="p-desc">Elang - mencengkeram mangsa</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Ikan punya sirip untuk berenang di dalam air.')">
+            <span class="p-icon">🐟</span>
+            <span class="p-title">Sirip</span>
+            <span class="p-desc">Ikan - untuk berenang</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Burung punya paruh berbeda-beda sesuai makanannya.')">
+            <span class="p-icon">🐦</span>
+            <span class="p-title">Paruh</span>
+            <span class="p-desc">Burung - sesuai makanan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🏠 4. Keberagaman Budaya Indonesia</h4>
+      <p>Mengenali contoh rumah adat dari berbagai daerah dan pentingnya menghargai budaya.</p>
+    </div>
+
+    <div class="topic-card">
+      <h4>🌳 5. Pelestarian Lingkungan dan Penghijauan</h4>
+      <p>Menjelaskan dampak penebangan pohon terhadap suhu dan banjir.</p>
+      <div class="interactive-box">
+        <h4>🌍 Dampak Penebangan Pohon</h4>
+        <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+          <div style="background:rgba(6,214,160,0.2); padding:20px; border-radius:16px; text-align:center;">
+            <div style="font-size:3em;">🌲🌳🌲</div>
+            <h4 style="color:var(--success);">Ada Pohon</h4>
+            <p>• Suhu sejuk<br>• Tidak banjir<br>• Udara bersih<br>• Hewan punya rumah</p>
+          </div>
+          <div style="background:rgba(239,71,111,0.2); padding:20px; border-radius:16px; text-align:center;">
+            <div style="font-size:3em;">🪵🪵🪵</div>
+            <h4 style="color:var(--danger);">Tanpa Pohon</h4>
+            <p>• Suhu panas<br>• Mudah banjir<br>• Udara kotor<br>• Hewan kehilangan rumah</p>
+          </div>
+        </div>
+        <button class="audio-btn" onclick="speakText('Pohon sangat penting! Pohon menyerap karbon dioksida dan menghasilkan oksigen. Pohon juga menyerap air hujan sehingga mencegah banjir. Ayo tanam pohon!')">🔊 Dengarkan</button>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>⚡ 6. Perubahan Bentuk Energi</h4>
+      <p>Mengidentifikasi perubahan energi pada kipas angin, setrika, panel surya, dan alat sehari-hari.</p>
+      <div class="interactive-box">
+        <h4>🔄 Transformasi Energi</h4>
+        <div class="energy-flow">
+          <div class="energy-box source" onclick="speakText('Energi listrik dari stopkontak.')">⚡ Listrik</div>
+          <span class="energy-arrow">→</span>
+          <div class="energy-box transform" onclick="speakText('Kipas angin mengubah listrik menjadi gerak.')">🌀 Kipas Angin</div>
+          <span class="energy-arrow">→</span>
+          <div class="energy-box result" onclick="speakText('Hasilnya energi gerak atau kinetik!')">💨 Energi Gerak</div>
+        </div>
+        <div class="energy-flow" style="margin-top:15px;">
+          <div class="energy-box source">⚡ Listrik</div>
+          <span class="energy-arrow">→</span>
+          <div class="energy-box transform">🔥 Setrika</div>
+          <span class="energy-arrow">→</span>
+          <div class="energy-box result">🌡️ Energi Panas</div>
+        </div>
+        <div class="energy-flow" style="margin-top:15px;">
+          <div class="energy-box source">☀️ Cahaya Matahari</div>
+          <span class="energy-arrow">→</span>
+          <div class="energy-box transform">🔆 Panel Surya</div>
+          <span class="energy-arrow">→</span>
+          <div class="energy-box result">⚡ Energi Listrik</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🌿 7. Pemanfaatan Sumber Daya Alam secara Bijaksana</h4>
+      <p>Menjelaskan akibat pemanfaatan SDA tanpa memperhatikan kelestarian lingkungan.</p>
+    </div>
+
+    <div class="topic-card">
+      <h4>♻️ 8. SDA Dapat Diperbarui dan Tidak Dapat Diperbarui</h4>
+      <p>Mengelompokkan contoh seperti air, matahari, angin, dan batu bara berdasarkan kemampuan pemulihannya.</p>
+      <div class="interactive-box">
+        <h4>🔄 SDA Diperbarui vs Tidak Diperbarui</h4>
+        <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
+          <div style="background:rgba(6,214,160,0.2); padding:20px; border-radius:16px; min-width:220px;">
+            <h4 style="color:var(--success);">✅ Dapat Diperbarui</h4>
+            <p>☀️ Matahari<br>💨 Angin<br>💧 Air<br>🌱 Tumbuhan<br>🐟 Ikan</p>
+          </div>
+          <div style="background:rgba(239,71,111,0.2); padding:20px; border-radius:16px; min-width:220px;">
+            <h4 style="color:var(--danger);">❌ Tidak Dapat Diperbarui</h4>
+            <p>🪨 Batu Bara<br>🛢️ Minyak Bumi<br>⛽ Gas Alam<br>🥇 Emas<br>🔩 Besi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🏪 9. Kegiatan Ekonomi</h4>
+      <p>Membedakan produksi, distribusi, dan konsumsi dalam alur kegiatan dari petani hingga masyarakat membeli beras.</p>
+      <div class="interactive-box">
+        <h4>🌾 Alur Kegiatan Ekonomi Beras</h4>
+        <div class="lifecycle-container">
+          <div class="lifecycle-stage" onclick="speakText('Produksi: Petani menanam dan memanen padi di sawah.')">
+            <span class="stage-emoji">👨‍🌾</span>
+            <span class="stage-name">Produksi<br>(Petani menanam)</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Distribusi: Beras diangkut ke pasar dan toko-toko.')">
+            <span class="stage-emoji">🚛</span>
+            <span class="stage-name">Distribusi<br>(Pengangkutan)</span>
+          </div>
+          <span class="lifecycle-arrow">→</span>
+          <div class="lifecycle-stage" onclick="speakText('Konsumsi: Masyarakat membeli dan memakan beras.')">
+            <span class="stage-emoji">🍚</span>
+            <span class="stage-name">Konsumsi<br>(Masyarakat makan)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BAHASA INDONESIA PAGE -->
+<div class="page" id="page-bahasa">
+  <div class="material-section">
+    <h2 style="border-color: var(--bahasa-color);">📖 Bahasa Indonesia - Kelas IV SD</h2>
+    <p style="opacity:0.8; margin-bottom:20px; line-height:1.7;">
+      <strong>Fokus belajar:</strong> memahami bacaan, menggunakan kaidah bahasa, dan menyampaikan informasi secara jelas.
+    </p>
+
+    <div class="topic-card">
+      <h4>📚 1. Memahami Isi Bacaan dan Menyimpulkan Informasi</h4>
+      <p>Menentukan pernyataan yang sesuai dengan bacaan serta menyimpulkan tujuan atau pesan.</p>
+      <div class="interactive-box">
+        <h4>📖 Bacaan: "Sampah Plastik"</h4>
+        <div style="background:rgba(255,255,255,0.1); padding:15px; border-radius:12px; text-align:left; margin:15px 0; line-height:1.8;">
+          <p>Sampah plastik sangat berbahaya bagi lingkungan. Plastik membutuhkan waktu ratusan tahun untuk terurai. Jika dibuang sembarangan, plastik dapat mencemari tanah dan air. Hewan laut sering menyangka plastik sebagai makanan dan akhirnya mati. Oleh karena itu, kita harus mengurangi penggunaan plastik dan mendaur ulang sampah plastik.</p>
+        </div>
+        <p style="font-weight:700;">Apa pesan utama bacaan di atas?</p>
+        <div class="quiz-options" style="margin-top:10px;">
+          <button class="quiz-option" onclick="checkAnswer(this, false)">A. Plastik bagus untuk mainan</button>
+          <button class="quiz-option" onclick="checkAnswer(this, true)">B. Kita harus mengurangi penggunaan plastik</button>
+          <button class="quiz-option" onclick="checkAnswer(this, false)">C. Plastik cepat terurai di tanah</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🔤 2. Huruf Kapital pada Nama dan Peristiwa</h4>
+      <p>Memperbaiki penulisan nama hari, nama tempat, nama wilayah/jabatan sesuai kaidah.</p>
+      <div class="interactive-box">
+        <h4>✏️ Perbaiki Penulisan!</h4>
+        <p style="font-size:1.1em; margin:10px 0;">"pada hari senin, ayah pergi ke jakarta untuk bertemu presiden."</p>
+        <p style="font-weight:700; color:var(--success); font-size:1.1em;">✅ "Pada hari <u>Senin</u>, ayah pergi ke <u>Jakarta</u> untuk bertemu <u>Presiden</u>."</p>
+        <p style="margin-top:10px; font-size:0.9em; opacity:0.8;">💡 Huruf kapital digunakan untuk: nama hari, nama tempat, nama jabatan, awal kalimat</p>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>📜 3. Bagian Surat Undangan</h4>
+      <p>Mengenali informasi penting dalam undangan: hari/tanggal, waktu, tempat, dan acara.</p>
+      <div class="interactive-box">
+        <h4>💌 Contoh Surat Undangan</h4>
+        <div style="background:rgba(255,255,255,0.95); color:#333; padding:20px; border-radius:12px; max-width:400px; margin:15px auto; text-align:left;">
+          <p style="text-align:center; font-weight:900; font-size:1.1em;">UNDANGAN</p>
+          <hr style="margin:10px 0;">
+          <p>Kepada Yth. Orang Tua/Wali Murid</p>
+          <p style="margin-top:10px;">Dengan hormat, kami mengundang Bapak/Ibu untuk menghadiri:</p>
+          <p><strong>Acara:</strong> Rapat Wali Murid</p>
+          <p><strong>Hari/Tanggal:</strong> Senin, 15 Januari 2024</p>
+          <p><strong>Waktu:</strong> 09.00 - 11.00 WIB</p>
+          <p><strong>Tempat:</strong> Aula Sekolah</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>🖼️ 4. Poster dan Tujuan Ajakan</h4>
+      <p>Menentukan alasan poster dipasang dan memahami ajakan untuk melakukan kebiasaan yang baik.</p>
+    </div>
+
+    <div class="topic-card">
+      <h4>💬 5. Peribahasa</h4>
+      <p>Memahami makna peribahasa yang berkaitan dengan rajin berusaha dan belajar.</p>
+      <div class="interactive-box">
+        <h4>📝 Peribahasa Populer</h4>
+        <div class="pancasila-grid">
+          <div class="pancasila-item" onclick="speakText('Berakit-rakit ke hulu, berenang-renang ke tepian. Artinya: bersusah-susah dahulu, bersenang-senang kemudian.')">
+            <span class="p-icon">🚣</span>
+            <span class="p-title">Berakit-rakit ke hulu...</span>
+            <span class="p-desc">Bersusah dahulu, senang kemudian</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Sedikit demi sedikit, lama-lama menjadi bukit. Artinya: usaha kecil yang terus menerus akan menghasilkan sesuatu yang besar.')">
+            <span class="p-icon">⛰️</span>
+            <span class="p-title">Sedikit demi sedikit...</span>
+            <span class="p-desc">Usaha terus menerus = hasil besar</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Belajar sepanjang hayat. Artinya: kita harus belajar terus menerus seumur hidup.')">
+            <span class="p-icon">📚</span>
+            <span class="p-title">Belajar sepanjang hayat</span>
+            <span class="p-desc">Belajar terus seumur hidup</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Alah bisa karena biasa. Artinya: sesuatu yang sulit akan menjadi mudah jika sering dilakukan.')">
+            <span class="p-icon">💪</span>
+            <span class="p-title">Alah bisa karena biasa</span>
+            <span class="p-desc">Latihan membuat mahir</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>✨ 6. Kalimat Efektif</h4>
+      <p>Mengenali kalimat yang disusun sesuai kaidah kebahasaan dan menyampaikan maksud secara jelas.</p>
+      <div class="interactive-box">
+        <h4>✅ Kalimat Efektif vs Tidak Efektif</h4>
+        <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+          <div style="background:rgba(239,71,111,0.2); padding:15px; border-radius:12px; min-width:250px;">
+            <h4 style="color:var(--danger);">❌ Tidak Efektif</h4>
+            <p>"Para siswa-siswa sedang belajar di kelas-kelas."</p>
+            <p style="font-size:0.85em; opacity:0.7;">(Pemborosan kata)</p>
+          </div>
+          <div style="background:rgba(6,214,160,0.2); padding:15px; border-radius:12px; min-width:250px;">
+            <h4 style="color:var(--success);">✅ Efektif</h4>
+            <p>"Para siswa sedang belajar di kelas."</p>
+            <p style="font-size:0.85em; opacity:0.7;">(Jelas dan tidak boros)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>📖 7. Pesan atau Amanat Cerita</h4>
+      <p>Menentukan pelajaran yang dapat diambil dari tindakan dan pengalaman tokoh dalam cerita.</p>
+    </div>
+
+    <div class="topic-card">
+      <h4>🔗 8. Konjungsi atau Kata Penghubung</h4>
+      <p>Memilih kata penghubung yang tepat untuk menunjukkan hubungan antarklausa.</p>
+      <div class="interactive-box">
+        <h4>🔗 Kata Penghubung</h4>
+        <div class="pancasila-grid">
+          <div class="pancasila-item" onclick="speakText('Dan: untuk menghubungkan hal yang setara. Contoh: Ani dan Budi pergi ke sekolah.')">
+            <span class="p-icon">➕</span>
+            <span class="p-title">Dan</span>
+            <span class="p-desc">Menambah informasi</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Tetapi: untuk menunjukkan pertentangan. Contoh: Dia rajin tetapi nilainya kurang.')">
+            <span class="p-icon">↔️</span>
+            <span class="p-title">Tetapi</span>
+            <span class="p-desc">Pertentangan</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Karena: untuk menunjukkan sebab. Contoh: Dia tidak masuk karena sakit.')">
+            <span class="p-icon">❓</span>
+            <span class="p-title">Karena</span>
+            <span class="p-desc">Sebab/akibat</span>
+          </div>
+          <div class="pancasila-item" onclick="speakText('Kemudian: untuk menunjukkan urutan waktu. Contoh: Dia makan, kemudian pergi sekolah.')">
+            <span class="p-icon">⏭️</span>
+            <span class="p-title">Kemudian</span>
+            <span class="p-desc">Urutan waktu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <h4>📊 9. Membaca dan Menafsirkan Tabel</h4>
+      <p>Membaca data dalam tabel, membandingkan jumlah, dan menentukan kelompok yang membutuhkan perhatian.</p>
+      <div class="interactive-box">
+        <h4>📊 Tabel Data Siswa</h4>
+        <div class="bar-chart" id="barChart">
+          <div class="bar" style="height:120px; background:linear-gradient(to top, #4361ee, #4cc9f0);">
+            <span class="bar-value">24</span>
+            <span class="bar-label">Kelas A</span>
+          </div>
+          <div class="bar" style="height:160px; background:linear-gradient(to top, #f72585, #b5179e);">
+            <span class="bar-value">32</span>
+            <span class="bar-label">Kelas B</span>
+          </div>
+          <div class="bar" style="height:90px; background:linear-gradient(to top, #06d6a0, #059669);">
+            <span class="bar-value">18</span>
+            <span class="bar-label">Kelas C</span>
+          </div>
+          <div class="bar" style="height:140px; background:linear-gradient(to top, #ffd166, #f59e0b);">
+            <span class="bar-value">28</span>
+            <span class="bar-label">Kelas D</span>
+          </div>
+        </div>
+        <p style="margin-top:30px; font-weight:700;">Kelas B paling banyak (32 siswa), Kelas C paling sedikit (18 siswa)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ ADVENTURE PAGE -->
+<div class="page" id="page-quiz">
+  <div class="material-section">
+    <h2 style="border-color: var(--secondary);">⚔️ Petualangan Quiz - Taklukkan Semua Tantangan!</h2>
+
+    <div class="score-display">
+      <div class="score-item">
+        <div class="score-value" id="quizScore">0</div>
+        <div class="score-label">⭐ Skor</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value" id="quizLevel">1</div>
+        <div class="score-label">🗺️ Level</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value" id="quizStreak">0</div>
+        <div class="score-label">🔥 Streak</div>
+      </div>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="quizProgress" style="width: 0%;"></div>
+    </div>
+    <div class="progress-text" id="quizProgressText">0 / 10 soal diselesaikan</div>
+
+    <div class="adventure-map" id="adventureMap"></div>
+
+    <div class="adventure-container">
+      <div class="adventure-scene" id="adventureScene">
+        <span class="scene-emoji" id="sceneEmoji">🏰</span>
+        <div class="scene-text" id="sceneText">
+          Selamat datang, Petualang! 🎉<br>
+          Kamu akan menjelajahi 4 dunia pengetahuan:<br>
+          🔢 Dunia Matematika | 🇮🇩 Dunia Pancasila | 🔬 Dunia IPAS | 📖 Dunia Bahasa<br><br>
+          Jawab setiap pertanyaan dengan benar untuk mengumpulkan bintang! ⭐<br>
+          Siap untuk bertualang? Tekan tombol di bawah!
+        </div>
+      </div>
+
+      <div class="quiz-question" id="quizQuestion" style="display:none;">
+        <h3 id="questionTitle">Pertanyaan 1</h3>
+        <p id="questionText" style="font-size:1.1em; line-height:1.7; margin-bottom:15px;"></p>
+        <div class="quiz-options" id="quizOptions"></div>
+      </div>
+
+      <div class="explanation-box" id="quizExplanation">
+        <h4>🎉 Pembahasan</h4>
+        <p id="explanationText"></p>
+        <button class="audio-btn" id="explainAudioBtn" onclick="speakExplanation()">🔊 Dengarkan Pembahasan</button>
+      </div>
+
+      <div class="btn-group" id="quizButtons">
+        <button class="action-btn success" id="startQuizBtn" onclick="startQuiz()">🚀 Mulai Petualangan!</button>
+        <button class="action-btn warning" id="nextBtn" onclick="nextQuestion()" style="display:none;">➡️ Lanjut</button>
+        <button class="action-btn primary" id="restartBtn" onclick="restartQuiz()" style="display:none;">🔄 Main Lagi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="main-footer">
+  <p>🎮 Genza Education | Event Kompetisi SAS | Kelas IV SD</p>
+  <p style="margin-top:5px; font-size:0.85em;">#bimbelyangakubanget | Selamat belajar dan semoga berhasil! 🌟</p>
+</footer>
+
+<script>
+// ===== AUDIO SYSTEM =====
+let audioContext = null;
+let soundEnabled = true;
+let bgMusicPlaying = false;
+let bgMusicInterval = null;
+
+function initAudio() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+function playTone(frequency, duration, type = 'sine', volume = 0.1) {
+  if (!soundEnabled || !audioContext) return;
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+  gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + duration);
+}
+
+function playCorrectSound() {
+  initAudio();
+  playTone(523.25, 0.15, 'sine', 0.15);
+  setTimeout(() => playTone(659.25, 0.15, 'sine', 0.15), 150);
+  setTimeout(() => playTone(783.99, 0.3, 'sine', 0.15), 300);
+}
+
+function playWrongSound() {
+  initAudio();
+  playTone(200, 0.3, 'sawtooth', 0.1);
+  setTimeout(() => playTone(150, 0.4, 'sawtooth', 0.1), 300);
+}
+
+function playClickSound() {
+  initAudio();
+  playTone(800, 0.05, 'sine', 0.08);
+}
+
+function playLevelUpSound() {
+  initAudio();
+  const notes = [523.25, 659.25, 783.99, 1046.50];
+  notes.forEach((note, i) => {
+    setTimeout(() => playTone(note, 0.2, 'sine', 0.12), i * 150);
+  });
+}
+
+function playAdventureMusic() {
+  if (!soundEnabled || !audioContext) return;
+  const melody = [262, 294, 330, 349, 392, 440, 494, 523];
+  let noteIndex = 0;
+  bgMusicInterval = setInterval(() => {
+    if (soundEnabled && audioContext) {
+      playTone(melody[noteIndex % melody.length], 0.3, 'sine', 0.03);
+      noteIndex++;
+    }
+  }, 500);
+  bgMusicPlaying = true;
+}
+
+function stopAdventureMusic() {
+  if (bgMusicInterval) {
+    clearInterval(bgMusicInterval);
+    bgMusicInterval = null;
+  }
+  bgMusicPlaying = false;
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+  if (!soundEnabled) {
+    stopAdventureMusic();
+    window.speechSynthesis.cancel();
+  }
+}
+
+// ===== SPEECH SYNTHESIS =====
+function speakText(text) {
+  if (!soundEnabled) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'id-ID';
+  utterance.rate = 0.9;
+  utterance.pitch = 1.1;
+  utterance.volume = 1;
+  
+  // Try to find Indonesian voice
+  const voices = window.speechSynthesis.getVoices();
+  const idVoice = voices.find(v => v.lang.includes('id'));
+  if (idVoice) utterance.voice = idVoice;
+  
+  window.speechSynthesis.speak(utterance);
+}
+
+function speakExplanation() {
+  const text = document.getElementById('explanationText').textContent;
+  speakText(text);
+}
+
+// Load voices
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
+}
+
+// ===== PARTICLES BACKGROUND =====
+function createParticles() {
+  const container = document.getElementById('bgParticles');
+  const colors = ['#4361ee', '#f72585', '#4cc9f0', '#06d6a0', '#ffd166'];
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    const size = Math.random() * 8 + 3;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    particle.style.animationDelay = (Math.random() * 10) + 's';
+    container.appendChild(particle);
+  }
+}
+
+// ===== NAVIGATION =====
+function showPage(pageId) {
+  playClickSound();
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  const navBtn = document.querySelector(`.nav-btn[onclick="showPage('${pageId}')"]`);
+  if (navBtn) navBtn.classList.add('active');
+  
+  if (pageId === 'quiz') {
+    initAudio();
+    playAdventureMusic();
+  } else {
+    stopAdventureMusic();
+  }
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== MATH ANSWER CHECK =====
+function checkMathAnswer(btn, correctAnswer) {
+  const answer = parseInt(btn.textContent);
+  const parent = btn.closest('.interactive-box');
+  const expBox = parent.querySelector('.explanation-box');
+  
+  document.querySelectorAll('.action-btn.primary').forEach(b => {
+    b.style.pointerEvents = 'none';
+  });
+  
+  if (answer === correctAnswer) {
+    btn.classList.add('correct');
+    playCorrectSound();
+    expBox.classList.add('show');
+    speakText('Benar! Jawabannya ' + correctAnswer + '! Hebat!');
+    updateScore(true);
+  } else {
+    btn.classList.add('wrong');
+    playWrongSound();
+    // Highlight correct answer
+    document.querySelectorAll('.action-btn.primary').forEach(b => {
+      if (parseInt(b.textContent) === correctAnswer) {
+        b.classList.add('correct');
+      }
+    });
+    expBox.classList.add('show');
+    speakText('Kurang tepat. Jawabannya adalah ' + correctAnswer + '. ' + expBox.querySelector('p').textContent);
+    updateScore(false);
+  }
+}
+
+// ===== CLOCK =====
+function setClock(hour, minute) {
+  const hourHand = document.getElementById('hourHand');
+  const minuteHand = document.getElementById('minuteHand');
+  const angleDisplay = document.getElementById('angleDisplay');
+  
+  const hourDeg = (hour % 12) * 30 + minute * 0.5;
+  const minuteDeg = minute * 6;
+  
+  hourHand.style.transform = `rotate(${hourDeg}deg)`;
+  minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+  
+  let angle = Math.abs(hourDeg - minuteDeg);
+  if (angle > 180) angle = 360 - angle;
+  
+  let angleName = '';
+  if (angle === 0) angleName = '0° (Tidak ada sudut)';
+  else if (angle === 90) angleName = '90° (Sudut Siku-siku)';
+  else if (angle === 180) angleName = '180° (Sudut Lurus)';
+  else if (angle < 90) angleName = angle + '° (Sudut Lancip)';
+  else angleName = angle + '° (Sudut Tumpul)';
+  
+  angleDisplay.textContent = 'Sudut: ' + angleName;
+  speakText('Pukul ' + hour + '. Sudut yang terbentuk adalah ' + angleName);
+  playClickSound();
+}
+
+// ===== QUIZ SYSTEM =====
+const quizQuestions = [
+  {
+    subject: 'math',
+    emoji: '🔢',
+    scene: '🏰 Gerbang Matematika',
+    question: 'Ada 5 kotak, setiap kotak berisi 8 apel. 6 apel dimakan. Berapa sisa apel?',
+    options: ['34', '40', '36', '42'],
+    correct: 0,
+    explanation: '5 kotak × 8 apel = 40 apel total. 40 - 6 = 34 apel sisa. Jawabannya 34!'
+  },
+  {
+    subject: 'math',
+    emoji: '🍕',
+    scene: '🍕 Pulau Pecahan',
+    question: 'Pecahan manakah yang paling besar?',
+    options: ['1/8', '1/4', '1/2', '1/6'],
+    correct: 2,
+    explanation: 'Semakin kecil penyebut, semakin besar nilai pecahan. 1/2 = 0.5, 1/4 = 0.25, 1/6 ≈ 0.17, 1/8 = 0.125. Jadi 1/2 paling besar!'
+  },
+  {
+    subject: 'math',
+    emoji: '📐',
+    scene: '📐 Taman Persegi',
+    question: 'Taman berbentuk persegi panjang dengan panjang 12 m dan lebar 7 m. Berapa kelilingnya?',
+    options: ['38 m', '84 m', '19 m', '42 m'],
+    correct: 0,
+    explanation: 'Keliling = 2 × (p + l) = 2 × (12 + 7) = 2 × 19 = 38 m.'
+  },
+  {
+    subject: 'math',
+    emoji: '💰',
+    scene: '💰 Toko Serba Ada',
+    question: 'Ibu punya uang Rp100.000. Membeli buku Rp35.000 dan pensil Rp15.000. Berapa kembalinya?',
+    options: ['Rp60.000', 'Rp50.000', 'Rp45.000', 'Rp55.000'],
+    correct: 1,
+    explanation: 'Total belanja = Rp35.000 + Rp15.000 = Rp50.000. Kembalian = Rp100.000 - Rp50.000 = Rp50.000.'
+  },
+  {
+    subject: 'math',
+    emoji: '🔁',
+    scene: '🔁 Menara KPK',
+    question: 'Lampu A menyala setiap 3 detik, lampu B setiap 5 detik. Berapa detik mereka menyala bersamaan?',
+    options: ['8 detik', '15 detik', '10 detik', '20 detik'],
+    correct: 1,
+    explanation: 'KPK(3,5) = 15. Kelipatan 3: 3,6,9,12,15... Kelipatan 5: 5,10,15... Yang sama pertama kali adalah 15.'
+  },
+  {
+    subject: 'pancasila',
+    emoji: '⚖️',
+    scene: '⚖️ Pengadilan Keadilan',
+    question: 'Mengapa hak dan kewajiban harus seimbang?',
+    options: [
+      'Agar kita bisa mendapat semua yang kita mau',
+      'Untuk menciptakan kehidupan yang tertib dan harmonis',
+      'Supaya kita tidak perlu melakukan kewajiban',
+      'Karena hak lebih penting dari kewajiban'
+    ],
+    correct: 1,
+    explanation: 'Hak dan kewajiban harus seimbang untuk menciptakan kehidupan yang tertib dan harmonis. Jika hanya menuntut hak tanpa menjalankan kewajiban, kehidupan akan kacau.'
+  },
+  {
+    subject: 'pancasila',
+    emoji: '🤝',
+    scene: '🤝 Desa Kerja Sama',
+    question: 'Dalam kerja kelompok, pembagian tugas harus mempertimbangkan...',
+    options: [
+      'Siapa yang paling populer',
+      'Kemampuan setiap anggota agar semua bisa berkontribusi',
+      'Siapa yang paling dekat dengan ketua',
+      'Tugas yang paling mudah saja'
+    ],
+    correct: 1,
+    explanation: 'Pembagian tugas harus mempertimbangkan kemampuan setiap anggota agar semua bisa berkontribusi. Ini membuat kerja kelompok lebih efektif dan adil.'
+  },
+  {
+    subject: 'ipas',
+    emoji: '🦋',
+    scene: '🦋 Hutan Metamorfosis',
+    question: 'Urutan daur hidup kupu-kupu yang benar adalah...',
+    options: [
+      'Kupu-kupu → Ulat → Kepompong → Telur',
+      'Telur → Kepompong → Ulat → Kupu-kupu',
+      'Telur → Ulat → Kepompong → Kupu-kupu',
+      'Ulat → Telur → Kepompong → Kupu-kupu'
+    ],
+    correct: 2,
+    explanation: 'Daur hidup kupu-kupu: Telur → Ulat (larva) → Kepompong (pupa) → Kupu-kupu (imago). Ini disebut metamorfosis sempurna.'
+  },
+  {
+    subject: 'ipas',
+    emoji: '⚡',
+    scene: '⚡ Laboratorium Energi',
+    question: 'Setrika mengubah energi listrik menjadi energi...',
+    options: ['Gerak', 'Bunyi', 'Panas', 'Cahaya'],
+    correct: 2,
+    explanation: 'Setrika mengubah energi listrik menjadi energi panas untuk merapikan pakaian. Energi listrik → Energi panas.'
+  },
+  {
+    subject: 'bahasa',
+    emoji: '📖',
+    scene: '📖 Perpustakaan Kata',
+    question: 'Peribahasa "Sedikit demi sedikit, lama-lama menjadi bukit" artinya...',
+    options: [
+      'Bukit terbuat dari batu kecil',
+      'Usaha kecil yang terus menerus akan menghasilkan sesuatu yang besar',
+      'Kita harus mengumpulkan batu',
+      'Sedikit itu lebih baik dari banyak'
+    ],
+    correct: 1,
+    explanation: 'Peribahasa ini artinya usaha kecil yang dilakukan terus menerus akan menghasilkan sesuatu yang besar. Seperti menabung sedikit-sedikit lama-lama jadi banyak!'
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let streak = 0;
+let correctCount = 0;
+let quizStarted = false;
+let answered = false;
+
+function buildAdventureMap() {
+  const map = document.getElementById('adventureMap');
+  map.innerHTML = '';
+  quizQuestions.forEach((q, i) => {
+    if (i > 0) {
+      const path = document.createElement('div');
+      path.className = 'map-path' + (i <= currentQuestion ? ' completed' : '');
+      map.appendChild(path);
+    }
+    const node = document.createElement('div');
+    node.className = 'map-node';
+    if (i < currentQuestion) node.classList.add('completed');
+    else if (i === currentQuestion) node.classList.add('current');
+    else node.classList.add('locked');
+    node.textContent = q.emoji;
+    node.title = 'Level ' + (i + 1);
+    map.appendChild(node);
+  });
+}
+
+function startQuiz() {
+  initAudio();
+  quizStarted = true;
+  currentQuestion = 0;
+  score = 0;
+  streak = 0;
+  correctCount = 0;
+  answered = false;
+  document.getElementById('startQuizBtn').style.display = 'none';
+  document.getElementById('restartBtn').style.display = 'none';
+  document.getElementById('quizQuestion').style.display = 'block';
+  buildAdventureMap();
+  showQuestion();
+  playLevelUpSound();
+}
+
+function showQuestion() {
+  if (currentQuestion >= quizQuestions.length) {
+    showQuizResult();
+    return;
+  }
+  
+  answered = false;
+  const q = quizQuestions[currentQuestion];
+  document.getElementById('sceneEmoji').textContent = q.emoji;
+  document.getElementById('sceneText').innerHTML = `<strong>${q.scene}</strong><br>Level ${currentQuestion + 1} dari ${quizQuestions.length}`;
+  document.getElementById('questionTitle').textContent = `⚔️ Tantangan ${currentQuestion + 1}`;
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('quizExplanation').classList.remove('show');
+  document.getElementById('nextBtn').style.display = 'none';
+  
+  const optionsDiv = document.getElementById('quizOptions');
+  optionsDiv.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    optionsDiv.appendChild(btn);
+  });
+  
+  updateQuizUI();
+  speakText('Tantangan ' + (currentQuestion + 1) + '! ' + q.question);
+}
+
+function selectAnswer(index) {
+  if (answered) return;
+  answered = true;
+  
+  const q = quizQuestions[currentQuestion];
+  const options = document.querySelectorAll('.quiz-option');
+  
+  options.forEach((opt, i) => {
+    opt.style.pointerEvents = 'none';
+    if (i === q.correct) opt.classList.add('correct');
+  });
+  
+  const expBox = document.getElementById('quizExplanation');
+  document.getElementById('explanationText').textContent = q.explanation;
+  
+  if (index === q.correct) {
+    options[index].classList.add('correct');
+    playCorrectSound();
+    correctCount++;
+    score += 10 + (streak * 2);
+    streak++;
+    speakText('Benar! Hebat! ' + q.explanation);
+    createConfetti();
+  } else {
+    options[index].classList.add('wrong');
+    playWrongSound();
+    streak = 0;
+    speakText('Kurang tepat. ' + q.explanation);
+  }
+  
+  currentQuestion++;
+  expBox.classList.add('show');
+  document.getElementById('nextBtn').style.display = 'inline-block';
+  updateQuizUI();
+  buildAdventureMap();
+}
+
+function nextQuestion() {
+  playClickSound();
+  showQuestion();
+}
+
+function showQuizResult() {
+  stopAdventureMusic();
+  document.getElementById('quizQuestion').style.display = 'none';
+  document.getElementById('quizExplanation').classList.remove('show');
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('restartBtn').style.display = 'inline-block';
+  
+  const maxScore = quizQuestions.length * 10;
+  let message = '';
+  let emoji = '';
+  
+  if (score >= maxScore * 0.8) {
+    message = 'LUAR BIASA! Kamu adalah Juara Pengetahuan! 🏆';
+    emoji = '👑';
+    playLevelUpSound();
+    createConfetti();
+    createConfetti();
+  } else if (score >= maxScore * 0.5) {
+    message = 'Hebat! Kamu sudah belajar dengan baik! 🌟';
+    emoji = '🌟';
+    playCorrectSound();
+  } else {
+    message = 'Terus belajar! Kamu pasti bisa lebih baik! 💪';
+    emoji = '💪';
+  }
+  
+  document.getElementById('sceneEmoji').textContent = emoji;
+  document.getElementById('sceneText').innerHTML = `
+    <strong>${message}</strong><br><br>
+    ⭐ Skor Akhir: <strong>${score}</strong><br>
+    ✅ Benar: <strong>${correctCount}</strong> dari ${quizQuestions.length}<br>
+    📊 Persentase: <strong>${Math.round((score / maxScore) * 100)}%</strong>
+  `;
+  
+  speakText(message + ' Skor akhirmu ' + score + ' dari ' + maxScore + '. ' + (score >= maxScore * 0.8 ? 'Luar biasa!' : 'Terus belajar ya!'));
+  updateQuizUI();
+  buildAdventureMap();
+}
+
+function restartQuiz() {
+  playClickSound();
+  document.getElementById('startQuizBtn').style.display = 'inline-block';
+  document.getElementById('restartBtn').style.display = 'none';
+  document.getElementById('quizQuestion').style.display = 'none';
+  document.getElementById('sceneEmoji').textContent = '🏰';
+  document.getElementById('sceneText').innerHTML = 'Siap untuk bertualang lagi? Tekan Mulai!';
+  currentQuestion = 0;
+  score = 0;
+  streak = 0;
+  correctCount = 0;
+  updateQuizUI();
+  buildAdventureMap();
+}
+
+function updateQuizUI() {
+  document.getElementById('quizScore').textContent = score;
+  document.getElementById('quizLevel').textContent = Math.min(currentQuestion + 1, quizQuestions.length);
+  document.getElementById('quizStreak').textContent = streak;
+  
+  const progress = (currentQuestion / quizQuestions.length) * 100;
+  document.getElementById('quizProgress').style.width = progress + '%';
+  document.getElementById('quizProgressText').textContent = `${currentQuestion} / ${quizQuestions.length} soal diselesaikan`;
+}
+
+// ===== SCORE TRACKING =====
+let totalStars = 0;
+let totalCorrect = 0;
+let totalAttempts = 0;
+
+function updateScore(correct) {
+  totalAttempts++;
+  if (correct) {
+    totalCorrect++;
+    totalStars++;
+  }
+  document.getElementById('totalStars').textContent = totalStars;
+  document.getElementById('totalCorrect').textContent = totalCorrect;
+  document.getElementById('totalAttempts').textContent = totalAttempts;
+}
+
+// ===== CONFETTI =====
+function createConfetti() {
+  const colors = ['#4361ee', '#f72585', '#4cc9f0', '#06d6a0', '#ffd166', '#ef476f'];
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti-piece';
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    confetti.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+    confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 4000);
+  }
+}
+
+// ===== CHARACTER =====
+const characterTips = [
+  "Halo! Aku Foxy! 🦊 Ayo belajar dengan semangat!",
+  "Tips: Baca soal dengan teliti sebelum menjawab! 📖",
+  "Ingat: Pecahan dengan penyebut lebih kecil = nilai lebih besar! 🍕",
+  "KPK itu kelipatan yang sama dari dua bilangan! 🔁",
+  "Keliling = jumlah semua sisi. Luas = panjang × lebar! 📐",
+  "Hak dan kewajiban harus seimbang ya! ⚖️",
+  "Daur hidup kupu-kupu: Telur→Ulat→Kepompong→Kupu-kupu! 🦋",
+  "Peribahasa 'Alah bisa karena biasa' artinya latihan membuat mahir! 💪",
+  "Energi tidak bisa diciptakan, hanya berubah bentuk! ⚡",
+  "Ayo jawab semua soal dengan percaya diri! 🌟"
+];
+let tipIndex = 0;
+
+function toggleCharacterSpeech() {
+  playClickSound();
+  const speech = document.getElementById('characterSpeech');
+  speech.textContent = characterTips[tipIndex];
+  speech.classList.toggle('show');
+  speakText(characterTips[tipIndex]);
+  tipIndex = (tipIndex + 1) % characterTips.length;
+  setTimeout(() => speech.classList.remove('show'), 5000);
+}
+
+// ===== CANVAS DRAWING (Garden) =====
+function drawGarden() {
+  const canvas = document.getElementById('gardenCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  // Grass
+  ctx.fillStyle = '#2d5a27';
+  ctx.fillRect(0, 0, 300, 200);
+  
+  // Garden border (rectangle)
+  ctx.strokeStyle = '#8B4513';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(30, 30, 240, 140);
+  
+  // Label dimensions
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 14px Nunito';
+  ctx.textAlign = 'center';
+  ctx.fillText('15 m', 150, 22);
+  ctx.fillText('8 m', 18, 105);
+  
+  // Trees
+  ctx.font = '30px Arial';
+  ctx.fillText('🌳', 80, 120);
+  ctx.fillText('🌲', 150, 115);
+  ctx.fillText('🌳', 220, 120);
+  
+  // Flowers
+  ctx.fillText('🌸', 60, 155);
+  ctx.fillText('🌺', 120, 160);
+  ctx.fillText('🌻', 180, 155);
+  ctx.fillText('🌷', 240, 158);
+  
+  // Fence posts
+  ctx.fillStyle = '#DEB887';
+  for (let i = 30; i <= 270; i += 30) {
+    ctx.fillRect(i - 3, 25, 6, 15);
+  }
+}
+
+// ===== KPK NUMBER LINE =====
+function buildKPKNumberLine() {
+  const container = document.getElementById('kpkNumberLine');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  for (let i = 0; i <= 20; i++) {
+    if (i > 0) {
+      const seg = document.createElement('div');
+      seg.className = 'number-line-segment';
+      container.appendChild(seg);
+    }
+    const point = document.createElement('div');
+    point.className = 'number-point';
+    point.textContent = i;
+    
+    if (i > 0 && i % 4 === 0 && i % 6 === 0) {
+      point.style.background = '#ffd166';
+      point.style.color = '#333';
+      point.title = 'KPK!';
+    } else if (i > 0 && i % 4 === 0) {
+      point.style.background = '#4361ee';
+      point.title = 'Kelipatan 4';
+    } else if (i > 0 && i % 6 === 0) {
+      point.style.background = '#f72585';
+      point.title = 'Kelipatan 6';
+    }
+    
+    point.onclick = () => {
+      playClickSound();
+      document.querySelectorAll('.number-point').forEach(p => p.classList.remove('active'));
+      point.classList.add('active');
+      
+      let info = '';
+      if (i === 0) info = 'Nol';
+      else if (i % 4 === 0 && i % 6 === 0) info = `${i} = KPK! (Kelipatan 4 dan 6)`;
+      else if (i % 4 === 0) info = `${i} = Kelipatan 4`;
+      else if (i % 6 === 0) info = `${i} = Kelipatan 6`;
+      else info = `${i} = Bukan kelipatan 4 atau 6`;
+      
+      speakText(info);
+    };
+    
+    container.appendChild(point);
+  }
+}
+
+// ===== QUIZ ANSWER CHECK (Bahasa) =====
+function checkAnswer(btn, isCorrect) {
+  const parent = btn.closest('.interactive-box');
+  const allOptions = parent.querySelectorAll('.quiz-option');
+  allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+  
+  if (isCorrect) {
+    btn.classList.add('correct');
+    playCorrectSound();
+    speakText('Benar! Hebat sekali!');
+    updateScore(true);
+    createConfetti();
+  } else {
+    btn.classList.add('wrong');
+    playWrongSound();
+    allOptions.forEach(opt => {
+      if (opt.onclick.toString().includes('true')) {
+        // Can't easily check, so just highlight
+      }
+    });
+    // Find correct by checking onclick
+    allOptions.forEach(opt => {
+      if (opt.getAttribute('onclick').includes('true')) {
+        opt.classList.add('correct');
+      }
+    });
+    speakText('Kurang tepat. Coba perhatikan lagi ya!');
+    updateScore(false);
+  }
+}
+
+// ===== INITIALIZATION =====
+window.addEventListener('load', () => {
+  createParticles();
+  drawGarden();
+  buildKPKNumberLine();
+  buildAdventureMap();
+  
+  // Initialize clock
+  setClock(3, 0);
+  
+  // Hide loading
+  setTimeout(() => {
+    document.getElementById('loadingOverlay').classList.add('hide');
+    setTimeout(() => {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }, 500);
+  }, 1500);
+  
+  // Show character speech after delay
+  setTimeout(() => {
+    document.getElementById('characterSpeech').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('characterSpeech').classList.remove('show');
+    }, 5000);
+  }, 3000);
+});
+
+// Enable audio on first interaction
+document.addEventListener('click', () => {
+  initAudio();
+}, { once: true });
+</script>
+</body>
+</html>
